@@ -5,10 +5,13 @@ export default function POSPage() {
   const [productCode, setProductCode] = useState("");
   const [product, setProduct] = useState(null);
   const [cart, setCart] = useState([]);
-  const [isPurchasing, setIsPurchasing] = useState(false); // 追加：連打防止フラグ
+  const [isPurchasing, setIsPurchasing] = useState(false); // 連打防止フラグ
 
   const fetchProduct = async () => {
-    if (!productCode) return;
+    if (!productCode) {
+      alert("バーコードを入力してください。");
+      return;
+    }
     try {
       const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
       const response = await fetch(`${API_BASE_URL}/product/${productCode}`);
@@ -21,16 +24,23 @@ export default function POSPage() {
   };
 
   const addToCart = () => {
-    if (!product) return;
+    if (!product) {
+      alert("商品が読み込まれていません。バーコードを読み込んでください。");
+      return;
+    }
     setCart([...cart, product]);
     setProduct(null);
     setProductCode("");
   };
 
   const handlePurchase = async () => {
-    if (cart.length === 0 || isPurchasing) return; // 連打防止
+    if (cart.length === 0) {
+      alert("購入リストが空です。商品を追加してください。");
+      return;
+    }
+    if (isPurchasing) return; // 連打防止
 
-    setIsPurchasing(true); // 購入開始時にフラグON
+    setIsPurchasing(true);
 
     const totalAmount = cart.reduce((sum, item) => sum + item.PRICE, 0);
     const requestBody = {
@@ -55,7 +65,11 @@ export default function POSPage() {
       });
 
       if (!response.ok) {
-        throw new Error("購入に失敗しました");
+        if (response.status >= 500) {
+          throw new Error("サーバーエラーが発生しました。時間をおいて再度お試しください。");
+        } else {
+          throw new Error("購入処理に失敗しました。");
+        }
       }
 
       alert(`購入完了しました。\n合計金額: ${totalAmount}円 (税込)`);
@@ -63,7 +77,7 @@ export default function POSPage() {
     } catch (error) {
       alert(error.message);
     } finally {
-      setIsPurchasing(false); // 処理終了後にフラグOFF
+      setIsPurchasing(false);
     }
   };
 
@@ -127,7 +141,7 @@ export default function POSPage() {
 
           <button
             onClick={handlePurchase}
-            disabled={isPurchasing}  // 連打防止（購入中は無効化）
+            disabled={isPurchasing}
             className={`w-full border border-black text-black p-3 rounded ${
               isPurchasing ? "bg-gray-300 cursor-not-allowed" : "bg-blue-100 hover:bg-blue-200"
             } text-lg`}
