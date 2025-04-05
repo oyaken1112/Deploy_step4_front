@@ -1,0 +1,1312 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+  --app-bg: #fff9f0;
+  --card-bg: #ffffff;
+  --text-primary: #000000;
+  --text-secondary: #4b5563;
+  --accent-color: #ff8833; /* よりソフトなオレンジ色 */
+  --accent-hover: #ff9944;
+  --button-inactive: #e5e7eb;
+  --highlight-bg: #fff5e6;
+  --comparison-bg: #ffeeb4;
+  --footer-bg: #000000;
+  --footer-text: #ffffff;
+  --tool-button-bg: #f0f0f0;
+  --tool-button-active: #ff8833;
+  --tool-button-inactive: #cccccc;
+  --demo-popup-bg: rgba(0, 0, 0, 0.8);
+  --demo-popup-text: #ffffff;
+  --header-bg: transparent;
+  --header-scrolled-bg: #ffffff;
+  --pen-warm: rgba(255, 119, 51, 0.5);
+  --pen-cool: rgba(51, 119, 255, 0.5);
+  --pen-black: rgba(0, 0, 0, 0.5);
+}
+
+/* ダークモードの色も同様に調整 */
+.dark {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 0, 0, 0;
+  --background-end-rgb: 0, 0, 0;
+  --app-bg: #222222;
+  --card-bg: #333333;
+  --text-primary: #ffffff;
+  --text-secondary: #a0a0a0;
+  --accent-color: #ff8833;
+  --accent-hover: #ff9944;
+  --button-inactive: #3a3a3a;
+  --highlight-bg: #2d2d2d;
+  --comparison-bg: #3d3d3d;
+  --footer-bg: #000000;
+  --footer-text: #ffffff;
+  --tool-button-bg: #444444;
+  --tool-button-active: #ff8833;
+  --tool-button-inactive: #555555;
+  --demo-popup-bg: rgba(50, 50, 50, 0.9);
+  --demo-popup-text: #ffffff;
+  --header-bg: #fff9f0;
+  --header-scrolled-bg: #ffffff;
+  --pen-warm: rgba(255, 119, 51, 0.5);
+  --pen-cool: rgba(51, 119, 255, 0.5);
+  --pen-black: rgba(0, 0, 0, 0.5);
+}
+
+/* ダークモードでも明るい背景を維持するクラス */
+.preserve-bg {
+  background-color: #fff9f0 !important;
+}
+
+.dark .preserve-bg {
+  background-color: #fff9f0 !important;
+  color: #000000 !important;
+}
+
+.dark .preserve-bg * {
+  color: #000000 !important;
+}
+
+.dark .preserve-bg .text-white,
+.dark .preserve-bg [class*="text-white"] {
+  color: #ffffff !important;
+}
+
+.dark .preserve-card {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+}
+
+.dark .preserve-card * {
+  color: #000000 !important;
+}
+
+.dark .preserve-card .text-white,
+.dark .preserve-card [class*="text-white"] {
+  color: #ffffff !important;
+}
+
+/* ダークモードでボタンのテキストを白に保つ */
+.dark .nav-button,
+.dark .nav-button-back,
+.dark .nav-button-try,
+.dark .standard-button,
+.dark .special-hover-button,
+.dark .action-button,
+.dark .header-cta-button {
+  color: var(--accent-color) !important;
+}
+
+.dark .nav-button:hover,
+.dark .nav-button-back:hover,
+.dark .nav-button-try:hover {
+  color: white !important;
+}
+
+/* スマホ版でも特定のボタンのテキストを白に保つ */
+.dark .company-intro-button,
+.dark .image-create-button {
+  color: white !important;
+}
+
+/* ダークモードでも白いテキストを維持 */
+.preserve-white-text {
+  color: white !important;
+}
+
+.dark .preserve-white-text {
+  color: white !important;
+}
+
+/* オレンジ背景内のテキストを白に */
+.bg-[var(--accent-color)] *,
+.company-intro-link *,
+.dark .bg-[var(--accent-color)] *,
+.dark .company-intro-link * {
+  color: white !important;
+}
+
+/* 無料バッジのテキストを白に保つ */
+.free-badge,
+.dark .free-badge {
+  color: white !important;
+}
+
+/* アクションボタンのアイコンを白に保つ */
+.action-button svg,
+.dark .action-button svg {
+  color: white !important;
+}
+
+/* デモポップアップのテキストを白に保つ */
+.demo-popup,
+.dark .demo-popup {
+  color: white !important;
+}
+
+.demo-popup *,
+.dark .demo-popup * {
+  color: white !important;
+}
+
+body {
+  color: var(--text-primary);
+  background-color: var(--app-bg);
+}
+
+/* トップページの背景色を常に維持 */
+.top-page {
+  background-color: #fff9f0 !important;
+}
+
+.dark .top-page {
+  background-color: #fff9f0 !important;
+}
+
+@layer base {
+  
+  body {
+    background-color: var(--app-bg);
+    color: var(--text-primary);
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: 800;
+  }
+  p,
+  span,
+  div {
+    font-weight: 400;
+  }
+}
+
+/* フォントサイズを全体的に大きくする */
+html {
+  font-size: 18px;
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+/* ヘッダーCTAボタン */
+.header-cta-button {
+  font-weight: bold;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.header-cta-button:hover {
+  color: var(--accent-color);
+}
+
+/* メインコンテンツのパディング調整（ヘッダー分） */
+.main-content {
+  padding-top: 5rem;
+}
+
+/* 標準ボタン */
+.standard-button {
+  background-color: var(--accent-color);
+  color: white;
+  border-radius: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.standard-button:hover {
+  background-color: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 特別なホバーボタン */
+.special-hover-button {
+  background-color: var(--accent-color);
+  color: white;
+  border-radius: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-weight: bold;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  z-index: 1;
+  box-shadow: 0 4px 10px rgba(255, 119, 51, 0.3);
+}
+
+.special-hover-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, #ff7733, #ff8844, #ff7733);
+  background-size: 200% 200%;
+  z-index: -1;
+  transition: all 0.5s ease;
+}
+
+.special-hover-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(255, 119, 51, 0.4);
+  letter-spacing: 1px;
+}
+
+.special-hover-button:hover::before {
+  animation: gradientBG 1.5s ease infinite;
+}
+
+@keyframes gradientBG {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* イメージリンクボックス */
+.image-link-box {
+  position: relative;
+  border: 2px solid var(--accent-color);
+  border-radius: 0.5rem;
+  padding: 1.5rem 1rem;
+  background-color: #fff5e6;
+  box-shadow: 0 4px 12px rgba(255, 119, 51, 0.15);
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  animation: pulse 2s infinite;
+}
+
+.image-link-box::before,
+.image-link-box::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+}
+
+.image-link-box::before {
+  top: 0;
+  animation: shimmer 3s infinite;
+}
+
+.image-link-box::after {
+  bottom: 0;
+  animation: shimmer 3s infinite 1.5s;
+}
+
+.image-link-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(255, 119, 51, 0.25);
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 119, 51, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(255, 119, 51, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 119, 51, 0);
+  }
+}
+
+.image-link-box h2 {
+  color: var(--accent-color);
+  margin-bottom: 0.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* アクションボタン（保存・共有） */
+.action-button {
+  background-color: var(--accent-color);
+  color: white;
+  border: 2px solid var(--accent-color);
+  border-radius: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.action-button::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.5s, height 0.5s;
+}
+
+.action-button:hover {
+  background-color: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.action-button:hover::after {
+  width: 300px;
+  height: 300px;
+}
+
+/* ナビゲーションボタン - 戻る */
+.nav-button-back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  width: 190px;
+  border: 2px solid var(--accent-color);
+  border-radius: 0.5rem;
+  color: var(--accent-color);
+  font-weight: bold;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  background: transparent;
+  cursor: pointer;
+}
+
+.nav-button-back:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 100%;
+  background-color: var(--accent-color);
+  transition: width 0.3s ease;
+  z-index: 0;
+}
+
+.nav-button-back:hover {
+  color: white;
+}
+
+.nav-button-back:hover:before {
+  width: 100%;
+  right: auto;
+  left: 0;
+}
+
+.nav-button-back .button-text {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+/* ナビゲーションボタン - 次へ */
+.nav-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  width: 190px;
+  border: 2px solid var(--accent-color);
+  border-radius: 0.5rem;
+  color: var(--accent-color);
+  font-weight: bold;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  background: transparent;
+  cursor: pointer;
+}
+
+.nav-button:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background-color: var(--accent-color);
+  transition: width 0.3s ease;
+  z-index: 0;
+}
+
+.nav-button:hover {
+  color: white;
+}
+
+.nav-button:hover:before {
+  width: 100%;
+}
+
+.nav-button .button-text {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+/* ナビゲーションボタン - 他の部屋でも試す */
+.nav-button-try {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  width: 190px;
+  border: 2px solid var(--accent-color);
+  border-radius: 0.5rem;
+  color: var(--accent-color);
+  font-weight: bold;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  background: transparent;
+  cursor: pointer;
+}
+
+.nav-button-try:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0;
+  background-color: var(--accent-color);
+  transition: height 0.3s ease;
+  z-index: 0;
+}
+
+.nav-button-try:hover {
+  color: white;
+}
+
+.nav-button-try:hover:before {
+  height: 100%;
+}
+
+.nav-button-try .button-text {
+  position: relative;
+  z-index: 1;
+}
+
+/* 無効化されたボタン */
+.button-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+  border-color: #cccccc;
+  color: #999999;
+}
+
+.button-disabled:before {
+  display: none;
+}
+
+/* ツールチップ */
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltip-text {
+  visibility: hidden;
+  width: 200px;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip .tooltip-text::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.8) transparent transparent transparent;
+}
+
+.tooltip:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* ステップナビゲーション */
+.step-nav {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+  height: 100px;
+  width: 100%;
+}
+
+.step-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  max-width: 100px;
+}
+
+.step-circle {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.step-line {
+  height: 2px;
+  width: 100%;
+  margin-top: 1.5rem;
+}
+
+.step-label {
+  font-size: 0.75rem;
+  text-align: center;
+  width: 100%;
+  line-height: 1.2;
+}
+
+.step-label-break {
+  display: block;
+}
+
+.step-active {
+  background-color: var(--accent-color);
+  color: white;
+}
+
+.step-completed {
+  background-color: rgba(255, 119, 51, 0.5);
+  color: white;
+}
+
+.step-inactive {
+  background-color: var(--button-inactive);
+  color: var(--text-secondary);
+}
+
+.line-active {
+  background-color: rgba(255, 119, 51, 0.5);
+}
+
+.line-inactive {
+  background-color: var(--button-inactive);
+}
+
+/* 範囲選択のためのキャンバス */
+.drawing-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  cursor: crosshair;
+  touch-action: none; /* スマホでのスクロールを防止 */
+}
+
+/* ツールボタン */
+.tool-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--tool-button-bg);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.tool-button-active {
+  background-color: var(--tool-button-active);
+  color: white;
+}
+
+.tool-button-inactive {
+  background-color: var(--tool-button-inactive);
+  color: #888;
+  cursor: not-allowed;
+}
+
+/* ペンサイズ表示 */
+.pen-size-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.pen-size-circle {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: var(--accent-color);
+  opacity: 0.5;
+  transition: all 0.3s ease;
+}
+
+/* ペンカラーボタン */
+.pen-color-button {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin: 0 5px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.pen-color-button.active {
+  border-color: #000;
+  transform: scale(1.1);
+}
+
+.pen-color-warm {
+  background-color: #ff7733;
+}
+
+.pen-color-cool {
+  background-color: #3377ff;
+}
+
+.pen-color-black {
+  background-color: #000000;
+}
+
+/* デモポップアップ */
+.demo-popup {
+  position: absolute;
+  background-color: var(--demo-popup-bg);
+  color: var(--demo-popup-text);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  z-index: 50;
+  max-width: 90%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.3s ease-in-out;
+  white-space: nowrap;
+}
+
+/* 確認ポップアップ */
+.confirm-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.confirm-popup-content {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  max-width: 90%;
+  width: 400px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.confirm-popup-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.confirm-button {
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.confirm-yes {
+  background-color: var(--accent-color);
+  color: white;
+}
+
+.confirm-no {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* タブ切り替え */
+.tab-button {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem 0.5rem 0 0;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.tab-active {
+  background-color: var(--accent-color);
+  color: white;
+}
+
+.tab-inactive {
+  background-color: var(--button-inactive);
+  color: var(--text-secondary);
+}
+
+/* 目立つセクション */
+.highlight-section {
+  position: relative;
+  border: 2px solid var(--accent-color);
+  border-radius: 0.5rem;
+  padding: 1.5rem 1.5rem 1rem;
+  background-color: var(--highlight-bg);
+  box-shadow: 0 4px 12px rgba(255, 119, 51, 0.15);
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+
+.highlight-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, #ff7733, #ff8844);
+}
+
+.highlight-section h2 {
+  color: var(--accent-color);
+  margin-bottom: 0.5rem;
+}
+
+/* カテゴリーボタン */
+.category-button {
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.category-button-active {
+  background-color: var(--accent-color);
+  color: white;
+}
+
+.category-button-inactive {
+  background-color: #cccccc;
+  color: #666666;
+}
+
+.dark .category-button-inactive {
+  background-color: #444444;
+  color: #aaaaaa;
+}
+
+/* フッター */
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+/* 画像ポップアップ */
+.image-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.image-popup-content {
+  position: relative;
+  max-width: 90%;
+  max-height: 90%;
+}
+
+.image-popup-close {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  background-color: white;
+  color: black;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* リフォーム会社選びなら テキスト */
+.company-selection-text {
+  white-space: nowrap;
+}
+
+/* 無料バッジ */
+.free-badge {
+  display: inline-block;
+  border: 1px solid var(--accent-color);
+  padding: 0.1rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: bold;
+  margin-right: 0.5rem;
+  color: white;
+  background-color: var(--accent-color);
+}
+
+/* リンクスタイル */
+.link-underline {
+  position: relative;
+  display: inline-block;
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.link-underline::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  bottom: -2px;
+  left: 0;
+  background-color: var(--accent-color);
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.3s ease;
+}
+
+.link-underline:hover {
+  color: var(--accent-color);
+}
+
+.link-underline:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+/* 柔らかなオレンジ色のテキスト */
+.soft-orange-text {
+  color: #ff8833 !important;
+}
+
+.dark .soft-orange-text {
+  color: #ff9944 !important;
+}
+
+/* 素材選択のグリッド */
+.material-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+}
+
+.material-item {
+  height: 7rem;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.material-item.selected {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 3px rgba(255, 136, 51, 0.3);
+}
+
+.material-item .material-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 0.5rem;
+  font-size: 0.75rem;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+
+.material-item:hover .material-info,
+.material-item:active .material-info {
+  transform: translateY(0);
+}
+
+/* ペンサイズ調整UI */
+.pen-size-control {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  max-width: 300px;
+}
+
+.pen-icon {
+  flex-shrink: 0;
+}
+
+.pen-slider {
+  flex-grow: 1;
+}
+
+/* 会社紹介リンク */
+.company-intro-link {
+  display: block;
+  padding: 1rem;
+  background-color: var(--accent-color);
+  color: white;
+  border-radius: 0.5rem;
+  text-align: center;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-decoration: none;
+}
+
+.company-intro-link:hover {
+  background-color: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* 会社紹介リンク（アウトライン版） */
+.company-intro-link-outline {
+  display: block;
+  padding: 1rem;
+  background-color: transparent;
+  color: var(--accent-color);
+  border: 2px solid var(--accent-color);
+  border-radius: 0.5rem;
+  text-align: center;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  text-decoration: none;
+  margin-bottom: 1.5rem;
+}
+
+.company-intro-link-outline:hover {
+  background-color: var(--accent-color);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* スリム版ボタン */
+.slim-button {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: transparent;
+  color: var(--accent-color);
+  border: 2px solid var(--accent-color);
+  border-radius: 0.5rem;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.slim-button:hover {
+  background-color: var(--accent-color);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 範囲選択の説明 */
+.selection-instruction {
+  white-space: normal;
+  line-height: 1.4;
+}
+
+/* エラーメッセージ */
+.error-message {
+  color: #e53e3e;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+  text-align: center;
+  display: none;
+}
+
+.error-message.show {
+  display: block;
+}
+
+/* ヘッダースタイル */
+.header {
+  background-color: var(--header-bg);
+  transition: all 0.3s ease;
+}
+
+.header-scrolled {
+  background-color: var(--header-scrolled-bg);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* ヘッダーメニューリンク */
+.header-menu-link {
+  position: relative;
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+.header-menu-link::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background-color: var(--accent-color);
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.3s ease;
+}
+
+.header-menu-link:hover {
+  color: var(--accent-color);
+}
+
+.header-menu-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+/* モバイルメニュー */
+.mobile-menu {
+  background-color: white;
+}
+
+.mobile-menu-link {
+  color: var(--text-primary);
+}
+
+/* 画像コンテナ */
+.image-container {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.image-container img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  max-height: 80vh;
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+
+  .footer-links {
+    gap: 1rem;
+    font-size: 0.875rem;
+  }
+
+  .nav-button,
+  .nav-button-back,
+  .nav-button-try {
+    width: 100%;
+    padding: 0 1rem;
+    font-size: 14px;
+    height: 44px;
+  }
+
+  .step-nav {
+    padding: 0;
+  }
+
+  .step-circle {
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1rem;
+  }
+
+  .step-line {
+    width: 100%;
+  }
+
+  .step-label {
+    font-size: 0.7rem;
+  }
+
+  .step-nav {
+    padding-bottom: 1rem;
+  }
+
+  .step-circle {
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1rem;
+  }
+
+  .step-line {
+    width: 2rem;
+  }
+
+  .demo-popup {
+    width: 90%;
+    left: 5% !important;
+    transform: translateY(-50%) !important;
+    white-space: normal;
+  }
+
+  /* モバイル用のナビゲーションボタン調整 */
+  .nav-button,
+  .nav-button-back,
+  .nav-button-try {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+
+  .action-button {
+    font-size: 0.875rem;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .action-button svg {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  /* リフォーム会社選びなら の調整 */
+  .company-selection-text {
+    font-size: 0.875rem;
+    white-space: normal;
+  }
+
+  /* スマホでのテキスト折り返し対応 */
+  .mobile-wrap {
+    white-space: normal !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  }
+
+  /* スマホ用のレスポンシブ調整 */
+  .image-link-box {
+    padding: 1rem 0.75rem;
+  }
+
+  .image-link-box h2 {
+    font-size: 1.25rem;
+  }
+
+  .special-hover-button {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+  }
+
+  /* 新サービスとイメージを膨らませたい方の間隔調整 */
+  .new-service-badge {
+    top: -15px;
+  }
+
+  /* スマホ版のイメージ作成ボタン */
+  .mobile-image-create-button {
+    color: var(--accent-color) !important;
+  }
+
+  /* リフォーム会社選び用の調整 */
+  .reform-company-text {
+    display: inline-block;
+    white-space: nowrap;
+    font-size: 0.95rem;
+    letter-spacing: -0.02em;
+  }
+
+  /* 四角に囲まれたリフォーム会社選びのテキスト */
+  .flex.flex-row.flex-wrap.justify-center .border {
+    min-width: 30px;
+    font-size: 0.9rem;
+  }
+}
+
